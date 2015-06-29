@@ -1,0 +1,18 @@
+.box-rounded
+  %h1= t("rules")
+  %hr
+  %h3= t("guesses")
+  =t("rules_page.guesses")
+  %br/
+  %h3= t("score")
+  =t("rules_page.score")
+  %br/
+  %br/
+  %span.label.label-primary= pluralize("3", t("point"))
+  %br/
+  =t("rules_page.score_3")
+  %br/
+  %br/
+  %span.label.label-warning= pluralize("1", t("point"))
+  %br/
+  =t("rules_page.score_1")

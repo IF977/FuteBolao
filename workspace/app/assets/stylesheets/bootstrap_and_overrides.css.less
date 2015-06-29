@@ -1,0 +1,103 @@
+@import "twitter/bootstrap/bootstrap";
+
+// Set the correct sprite paths
+@iconSpritePath: image-url("twitter/bootstrap/glyphicons-halflings.png");
+@iconWhiteSpritePath: image-url("twitter/bootstrap/glyphicons-halflings-white.png");
+
+// Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
+@fontAwesomeEotPath: asset-url("fontawesome-webfont.eot");
+@fontAwesomeEotPath_iefix: asset-url("fontawesome-webfont.eot?#iefix");
+@fontAwesomeWoffPath: asset-url("fontawesome-webfont.woff");
+@fontAwesomeTtfPath: asset-url("fontawesome-webfont.ttf");
+@fontAwesomeSvgPath: asset-url("fontawesome-webfont.svg#fontawesomeregular");
+
+// Font Awesome
+@import "fontawesome/font-awesome";
+
+// Glyphicons
+//@import "twitter/bootstrap/sprites.less";
+
+// Your custom LESS stylesheets goes here
+//
+// Since bootstrap was imported above you have access to its mixins which
+// you may use and inherit here
+//
+// If you'd like to override bootstrap's own variables, you can do so here as well
+// See http://twitter.github.com/bootstrap/customize.html#variables for their names and documentation
+//
+// Example:
+// @linkColor: #ff0000;
+body {
+  background-color: #eee;
+}
+
+div.box-rounded {
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 40px;
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.25);
+     -moz-box-shadow: 0 1px 3px rgba(0,0,0,.25);
+          box-shadow: 0 1px 3px rgba(0,0,0,.25);
+}
+
+div.box-rounded-empty {
+  padding: 15px;
+  margin-bottom: 40px;
+}
+
+.post p, div.box-rounded-empty p {
+  font-size: 15px;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+hr {
+  margin-top: 15px;
+  margin-bottom: 8px;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover {
+  background-color: #eee;
+  font-weight: bold;
+  border-bottom-color: transparent;
+}
+
+.form-group label {
+  text-align: left;
+}
+
+.start-page {
+  max-width: 800px;
+}
+
+.bs-callout{margin:20px 0;padding:20px;border-left:3px solid #eee}.bs-callout h4{margin-top:0;margin-bottom:5px}.bs-callout p:last-child{margin-bottom:0}.bs-callout code{background-color:#fff;border-radius:3px}.bs-callout-danger{background-color:#fdf7f7;border-color:#d9534f}.bs-callout-danger h4{color:#d9534f}.bs-callout-warning{background-color:#fcf8f2;border-color:#f0ad4e}.bs-callout-warning h4{color:#f0ad4e}.bs-callout-info{background-color:#f4f8fa;border-color:#5bc0de}.bs-callout-info h4{color:#5bc0de}
+.bs-callout-danger {
+  
+}
+
+@media (max-width: 768px) {
+  .small-flag {
+    width: 30px;
+  }
+}
+
+.progress {
+  position: relative;
+}
+
+.progress span {
+  position: absolute;
+  display: block;
+  width: 100%;
+  color: #000;
+  font-weight: bold;
+ }

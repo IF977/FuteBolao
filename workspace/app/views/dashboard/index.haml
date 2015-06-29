@@ -1,0 +1,39 @@
+%ul.nav.nav-tabs
+  - @grouped_matches.each_with_index do |(group, matches), i|
+    %li{class: ("active" if i == 0)}
+      %a{href: "#group_#{group.id}", "data-toggle" => "tab"}= group.name
+%br/
+.tab-content
+  - @grouped_matches.each_with_index do |(group, matches), i|
+    %div{class: (i == 0 ? "tab-pane active" : "tab-pane"), id: "group_#{group.id}"}
+      .row
+        - matches.each do |match|
+          .col-md-6
+            .box-rounded
+              .row
+                .col-md-12.center
+                  = match.team_a.name
+                  %img.img-circle{src: match.team_a.flag, width: 30, hspace: 5}
+                  %span.h4
+                  = "#{match.goals_a} X #{match.goals_b}"
+                  %span.h4 
+                  %img.img-circle{src: match.team_b.flag, width: 30, hspace: 5}
+                  = match.team_b.name
+                  .row{style: 'margin-top: 15px;'}
+                    %small
+                      %span.glyphicon.glyphicon-time
+                      = match.data_hora
+                  %hr
+              .row
+                .col-md-9
+                  %small
+                    = t("guesses") + ":"
+                    %span{class: match.status_classes}= match.open_to_guesses_label
+                    - unless match.my_guess.nil?
+                      = "&nbsp;".html_safe
+                      - match.scorers_limited.each do |guess|
+                        %a{href: match_details_path(match)}
+                          %img.img-circle.tooltip-img{src: guess.user.profile_image, width: 20, title: guess.user.name, "data-toggle" => "tooltip", "data-placement" => "top"}
+                .col-md-3.right
+                  %a.btn.btn-default.btn-xs{href: match_details_path(match)}
+                    = "#{t("details")} &raquo;".html_safe

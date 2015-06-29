@@ -1,0 +1,51 @@
+- if guesses.empty?
+  %h2
+    %small
+      %span.glyphicon.glyphicon-info-sign
+      = t("no_history")
+- else
+  %table.table
+
+    %thead
+      // short details for mobile
+      %th.visible-xs.center{colspan: 3}= t("match")
+      %th.visible-xs.center.info{colspan: 3}= t("guess")
+      %th.visible-xs.center
+
+      // full details for other devices
+      %th.hidden-xs.center= t("match")
+      %th.hidden-xs.center{colspan: 2}
+      %th.hidden-xs.center{colspan: 3}= t("result")
+      %th.hidden-xs.center{colspan: 2}
+      %th.hidden-xs.center.info{colspan: 3}= t("guess")
+      %th.hidden-xs.center= t("score")
+
+    - guesses.each do |guess|
+      %tr
+        // short details for mobile
+        %td.visible-xs.center 
+          %img.img-circle.tooltip-img{src: guess.match.team_a.flag, width: 20, "data-toggle" => "tooltip", "data-placement" => "top", title: guess.match.team_a.name}
+        %td.visible-xs.center= "#{guess.match.goals_a} x #{guess.match.goals_b}"
+        %td.visible-xs.center
+          %img.img-circle.tooltip-img{src: guess.match.team_b.flag, width: 20, "data-toggle" => "tooltip", "data-placement" => "top", title: guess.match.team_b.name}
+
+        // full details for other devices
+        %td.hidden-xs.col-md-2.center
+          %a.tooltip-img{href: match_details_path(guess.match), "data-toggle" => "tooltip", "data-placement" => "right", title: guess.match.group.name}= "#{guess.match.data_hora}"
+        %td.right.hidden-xs= guess.match.team_a.name      
+        %td.center.hidden-xs
+          %img.img-circle.tooltip-img{src: guess.match.team_a.flag, width: 20, "data-toggle" => "tooltip", "data-placement" => "top", title: guess.match.team_a.name}
+        %td.col-sm-1.center.hidden-xs= guess.match.goals_a
+        %td.center.hidden-xs x
+        %td.col-sm-1.center.hidden-xs= guess.match.goals_b
+        %td.center.hidden-xs
+          %img.img-circle.tooltip-img{src: guess.match.team_b.flag, width: 20, "data-toggle" => "tooltip", "data-placement" => "top", title: guess.match.team_b.name}
+        %td.hidden-xs= guess.match.team_b.name
+
+        // same for both
+        %td.info.center= guess.goals_a
+        %td.info.center x
+        %td.info.center= guess.goals_b
+        %td.center
+          - if guess.score > 0
+            %span{class: guess.score_classes}= "+#{guess.score}"

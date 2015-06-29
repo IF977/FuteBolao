@@ -1,0 +1,3 @@
+.box-rounded
+  %h2= t("history_page.my_history")
+  = render partial: "guesses_table", locals: {guesses: @history.public_guesses}

@@ -1,0 +1,21 @@
+%br
+.row.center
+  %a.btn.btn-primary.btn-lg{ role: "button", href: user_omniauth_authorize_path(:facebook) }
+    %span.glyphicon.glyphicon-thumbs-up 
+    = t("sessions.sign_in_with_facebook")
+  %h3= t("sessions.or")
+= form_for(resource, as: resource_name, url: session_path(resource_name), html: {role: 'form'}) do |f|
+  = render "devise/shared/devise_errors"
+  .form-group
+    = f.label :email
+    = f.email_field :email, autofocus: true, class: 'form-control'
+  .form-group
+    = f.label :password
+    = f.password_field :password, class: 'form-control'
+  .checkbox
+    = f.check_box :remember_me
+    = f.label :remember_me
+  = f.submit 'Login', class: 'btn btn-primary'
+%br/
+.row.center
+  %a{href: new_user_registration_path}= t("sessions.create_account")

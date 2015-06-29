@@ -1,0 +1,5 @@
+test:
+  adapter: mysql2
+  database: bolao_test
+  username: travis
+  encoding: utf8

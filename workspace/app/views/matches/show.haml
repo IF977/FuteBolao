@@ -1,0 +1,58 @@
+.box-rounded.center
+  %h1
+    = @match.team_a.name
+    %br.visible-xs
+    %img.img-circle.small-flag{src: @match.team_a.flag} 
+    = @match.goals_a
+    = "X"
+    = @match.goals_b
+    %img.img-circle.small-flag{src: @match.team_b.flag}
+    %br.visible-xs
+    = @match.team_b.name
+
+  %br
+  .row
+    .col-md-6.col-md-offset-3   
+      .progress.progress-striped.active
+        .progress-bar{class: @match.progress_class, role: "progressbar", "aria-valuenow" => @match.guesses.size, "aria-valuemin" => "0", "aria-valuemax" => @match.guesses_max, style: "width: #{@match.guesses_progress}%"}
+          %span= "#{t("guesses")}: #{@match.guesses.size} / #{@match.guesses_max}"
+
+.box-rounded
+  %span.glyphicon.glyphicon-time
+  = @match.data_hora
+  - if @match.is_open_to_guesses?
+    = "&nbsp;".html_safe
+    %a.btn.btn-danger.btn-xs{href: my_guesses_path}= t("take_a_guess")
+  - unless @match.scorers.empty?
+    = " | "
+    - @match.scorers.each do |guess|
+      %a{href: user_profile_path(guess.user)}
+        %img.img-circle.tooltip-img{src: guess.user.profile_image, width: 25, "data-toggle" => "tooltip", "data-placement" => "top", title: guess.user.name}
+
+- if @match.is_open_to_guesses?
+  .box-rounded
+    %h2
+      %small
+        %span.glyphicon.glyphicon-info-sign
+        = t("matches_page.not_started")
+- else
+  %h3= t("guesses")
+  .box-rounded
+    %table.table
+      %thead
+        %th
+        %th.center= t("guess")
+        %th.center= t("score")
+      - @match.guesses.each do |guess|
+        %tr
+          %td
+            %a{href: user_profile_path(guess.user)}
+              %img.img-circle.hidden-xs{src: guess.user.profile_image, width: 25, hspace: 5}
+            %a{href: user_profile_path(guess.user)}
+              = guess.user.name
+          %td.center
+            = guess
+          %td.center
+            - if guess.score > 0
+              %span{class: guess.score_classes}
+                = "+#{guess.score}"

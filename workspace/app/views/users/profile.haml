@@ -1,0 +1,13 @@
+.box-rounded
+  .row
+    .col-md-1.center
+      %img.img-circle{src: @profile.profile_image, vspace: 30, width: 60}
+    .col-md-10
+      %h1= @profile.name
+      %button.btn.btn-success= pluralize(@profile.score, t("point"))
+      - unless @profile.position.nil?
+        %button.btn.btn-info= "##{@profile.position}"
+
+.box-rounded
+  %h2= t("guesses")
+  = render partial: "guesses_table", locals: {guesses: @profile.public_guesses}

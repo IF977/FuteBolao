@@ -1,0 +1,30 @@
+.box-rounded
+  %h2
+    = t("my_guesses")
+    %small= "| #{t("guesses_page.future_matches")}"
+  = form_tag my_guesses_form_path do
+    = render 'submit_right'
+    %table.table
+      - @grouped_matches.each do |group, matches|
+        %thead
+          %th{colspan: 42}= group.name
+        - matches.each do |match|
+          = hidden_field_tag "guesses[][id]", match.my_guess.try(:id)
+          = hidden_field_tag "guesses[][match_id]", match.id
+          %tr{class: (match.is_today? ? "info" : "")}
+            %td.hidden-xs= match.data_hora
+            %td.hidden-xs{align: "right"}= match.team_a.name
+            %td.center
+              %img.img-circle.tooltip-img{src: match.team_a.flag, width: 20, "data-toggle" => "tooltip", "data-placement" => "top", title: match.team_a.name}
+            %td.col-sm-1
+              %input{type: "text", class: "form-control", name: 'guesses[][goals_a]', value: match.my_guess.try(:goals_a)}
+            %td.center= "x"
+            %td.col-sm-1
+              %input{type: "text", class: "form-control", name: 'guesses[][goals_b]', value: match.my_guess.try(:goals_b)}
+            %td
+              %img.img-circle.tooltip-img{src: match.team_b.flag, width: 20, "data-toggle" => "tooltip", "data-placement" => "top", title: match.team_b.name}
+            %td.hidden-xs= match.team_b.name
+            %td
+              - if match.is_today?
+                %span.glyphicon.glyphicon-time.tooltip-img{"data-toggle" => "tooltip", "data-placement" => "left", title: t("guesses_page.last_minutes")}
+    = render 'submit_right'

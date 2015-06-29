@@ -1,0 +1,5 @@
+- unless resource.errors.empty?
+  .bs-callout.bs-callout-danger
+    %ul.list-unstyled
+      - resource.errors.full_messages.each do |msg|
+        %li= msg

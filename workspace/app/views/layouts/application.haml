@@ -1,0 +1,119 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=Edge,chrome=1", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %title= content_for?(:title) ? yield(:title) : t("page_title")
+    = csrf_meta_tags
+    / Le HTML5 shim, for IE6-8 support of HTML elements
+    /[if lt IE 9]
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js" type="text/javascript"></script>
+    = stylesheet_link_tag "application", :media => "all"
+    / For third-generation iPad with high-resolution Retina display:
+    / Size should be 144 x 144 pixels
+    = favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144'
+    / For iPhone with high-resolution Retina display:
+    / Size should be 114 x 114 pixels
+    = favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114'
+    / For first- and second-generation iPad:
+    / Size should be 72 x 72 pixels
+    = favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72'
+    / For non-Retina iPhone, iPod Touch, and Android 2.1+ devices:
+    / Size should be 57 x 57 pixels
+    = favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png'
+    / For all other devices
+    / Size should be 32 x 32 pixels
+    = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'    
+  %body
+    .navbar.navbar-default.navbar-static-top
+      .container
+        .navbar-header
+          %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{:href => root_path} 
+            %strong= t("app_title")
+        .navbar-collapse.collapse
+          %ul.nav.navbar-nav
+            %li= link_to t("my_guesses"), my_guesses_path
+            %li= link_to t("history"), my_history_path
+            %li= link_to t("rules"), rules_path
+          %ul.nav.navbar-nav.navbar-right
+            %li
+              %a{href: "#"}
+                %img.img-circle{src: current_user.image, width: 25}
+                = "&nbsp;".html_safe + current_user.name
+            %li
+              %a{href: "#"}
+                %span.label.label-success= pluralize(current_user.score, t("point").camelize)                
+            - if current_user.admin?
+              %li
+                %a{href: rails_admin.dashboard_path, "data-no-turbolink" => ""}
+                  %span.label.label-danger
+                    %span.glyphicon.glyphicon-lock
+                    = "Admin"
+            %li
+              %a{href: destroy_user_session_path, method: :delete, "data-method" => :delete, rel: :nofollow}
+                = t("logout")
+                %span.glyphicon.glyphicon-log-out
+                
+    .container
+      .row
+        .col-lg-9
+          = bootstrap_flash
+          = yield
+        .col-lg-3
+          .box-rounded
+            %h4
+              %span.glyphicon.glyphicon-fire
+              = t("ranking")
+            %table.table
+              - @users.each_with_index do |user, index|
+                %tr{class: ("hide hidden_rank" if index > 3)}
+                  %td
+                    .row
+                      .col-xs-1.col-md-2
+                        %h4= user.position
+                      .col-xs-3.col-md-3
+                        %a{href: user_profile_path(user)} 
+                          %img.img-circle{src: user.profile_image, width: 50}
+                      .col-xs-7.col-md-6
+                        %a{href: user_profile_path(user)}
+                          %strong=user.name
+                        %br{clear: "all"}
+                        %span.label.label-default= pluralize(user.score, t("point").camelize)
+
+            - if @users.size > 4
+              %button.btn.expand_rank.btn-primary{type: "button"}
+                %span#expand.glyphicon.glyphicon-chevron-down
+
+          .box-rounded
+            %h4
+              %span.glyphicon.glyphicon-calendar
+              = t("today_matches")
+            - if @today_matches.empty?
+              %table.table
+                %tr
+                  %td= t("no_matches_today")
+            - else
+              %table.table
+                %tbody.rowlink{"data-link" => "row"}
+                  - @today_matches.each do |match|
+                    %tr
+                      %td.center
+                        %a{href: match_details_path(match)}= match.hora
+                        %span{class: match.status_classes}= match.open_to_guesses_label
+                      %td.center
+                        %img.img-circle.tooltip-img{src: match.team_a.flag, width: 30, "data-toggle" => "tooltip", "data-placement" => "top", title: match.team_a.name}
+                      %td.center= match.goals_a
+                      %td.center X
+                      %td.center= match.goals_b
+                      %td.center
+                        %img.img-circle.tooltip-img{src: match.team_b.flag, width: 30, "data-toggle" => "tooltip", "data-placement" => "top", title: match.team_b.name}
+              %a.btn.btn-default{href: my_guesses_path}= t("take_a_guess")
+      %footer
+        %p= "&copy; ".html_safe + t("app_title")
+
+    = javascript_include_tag "application"

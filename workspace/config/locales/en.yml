@@ -1,0 +1,68 @@
+en:
+  # Views
+  # Global and dashboard
+  open: "Open"
+  closed: "Closed"
+  point: "point"
+  today_matches: "Today's Matches"
+  no_matches_today: "No Matches Today"
+  my_guesses: "My Guesses"
+  history: "History"
+  rules: "Rules"
+  app_title: "Bolao Game"
+  page_title: "Bolao Game"
+  take_a_guess: "Take a Guess"
+  logout: "Logout"
+  ranking: "Ranking"
+  guesses: "Guesses"
+  guess: "Guess"
+  details: "Details"
+  no_history: "No guesses for finished matches to display at the moment"
+  match: "Match"
+  result: "Result"
+  score: "Score"
+
+  # guesses
+  guesses_page:
+    save_guesses: "Save Guesses"
+    future_matches: "Future Matches"
+    last_minutes: "Today Match! Last moments to save your guess for this match!"
+    guesses_saved: "Guesses Saved!"
+
+  # history
+  history_page:
+    my_history: "My History"
+
+  # matches
+  matches_page:
+    not_started: "Match not started yet! Come back soon to see other users guesses!"
+
+  sessions:
+    or: "or"
+    sign_in_with_facebook: "Sign in with Facebook"
+    create_account: "Creat Account"
+    back: "Back"
+
+  rules_page:
+    guesses: >
+      Each guess must be saved until the start time of the match.
+      After the start of each match it will not be possible to change your guess, and all
+      the guesses for that match will become public. When the match ends the ranking will be
+      updated according to the users scores.
+    score: "It's possible to score 1 or 3 points"
+    score_3: >
+      In order to score 3 points the user needs to guess the exact result of the match. For example,
+      if the match's result is BRA 3 x 0 USA the user guess must also be BRA 3 x 0 USA in order to 
+      score 3 points (the same is true for draws).
+    score_1: >
+      In order to score 1 point the user needs to guess only the winner or if it's a draw, but never the
+      exact result.
+      For example, if the match's result is BRA 3 x 0 USA and the user guess is BRA 2 x 1 USA the user will score 1
+      point. The same is true for draws. For example, if match's result is BRA 1 x 1 USA and the user guess is BRA 2 x 2 USA
+      the user will score 1 point.      
+
+  # Rails admin
+  admin:
+    actions:
+      rank_updater:
+        menu: "Update Rank"

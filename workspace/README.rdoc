@@ -1,0 +1,50 @@
+= \Bolão
+{<img src="https://travis-ci.org/josuelima/bolao.svg" alt="Build Status" />}[https://travis-ci.org/josuelima/bolao] {<img src="https://codeclimate.com/github/josuelima/bolao.png" />}[https://codeclimate.com/github/josuelima/bolao] {<img src="https://codeclimate.com/github/josuelima/bolao/coverage.png" />}[https://codeclimate.com/github/josuelima/bolao]
+
+Bolão is a traditional Guess Game where the users post their guesses for matches and then score points acoording to the matches results.
+Groups of friends usually make a Bolão during World Cups or Football leagues.
+
+This Bolão app is flexible and you can customize it to whatever sport or competition you want as long as 
+it has Versus matches (like football, basketbal, volleyball and so on).
+
+Each guess must be saved before the match starts. When a match starts it's not possible to update or save a guess for
+it anymore. When the match is over the Bolão admin will update it with the match result, which will generate scores based on the users guesses. A Rank will be shown in the main page according to the users scores. 
+
+{<img src="https://raw.githubusercontent.com/josuelima/bolao/master/app/assets/images/1-dashboard.png" alt="User Dashboard" width="150" />}[https://raw.githubusercontent.com/josuelima/bolao/master/app/assets/images/1-dashboard.png]
+{<img src="https://raw.githubusercontent.com/josuelima/bolao/master/app/assets/images/2-match.png" alt="Match Page" width="150" />}[https://raw.githubusercontent.com/josuelima/bolao/master/app/assets/images/2-match.png]
+{<img src="https://raw.githubusercontent.com/josuelima/bolao/master/app/assets/images/3-guesses.png" alt="Guesses Page" width="150" />}[https://raw.githubusercontent.com/josuelima/bolao/master/app/assets/images/3-guesses.png]
+{<img src="https://raw.githubusercontent.com/josuelima/bolao/master/app/assets/images/4-profile.png" alt="Profile Page" width="150" />}[https://raw.githubusercontent.com/josuelima/bolao/master/app/assets/images/4-profile.png]
+
+{<img src="https://raw.githubusercontent.com/josuelima/bolao/master/app/assets/images/5-responsive.jpg" alt="Responsive" width="150" />}[https://raw.githubusercontent.com/josuelima/bolao/master/app/assets/images/5-responsive.jpg]
+
+You can see an example running on: {www.fuleir.us}[http://www.fuleir.us]
+
+== App
+
+This app is built on Rails 4 using {RailsAdmin}[https://github.com/sferik/rails_admin] as dashboard.
+
+Each match should belong to a Group (like in world cup: Group A, Group B, Final...) and it's better and easier 
+to use seeds in order to fill your bolao initial matches in case you have manny (see an exemple at db/seeds.rb)
+
+Actually I'm using UOL CDN to retrieve the teams images. You can either customize it according to the tournament or league your Bolao is running, or use your custom images.
+
+I18n is done (en and pt-BR)
+
+Draper was used to decorate models and controllers, however I think it leaves a large footprint on the code. Maybe its better to remove draper in future.
+
+== Configs
+
+There is no special configs to do. You will just need to add an user admin (admin=true) to manage the bolao through
+Rails Admin.
+
+If you already have MySQL installed on your machine 'git pull' 'bundle' 'rake db:schema:load' and 'rails s' should be enough to make it run. 
+
+If you want to make it possible to sign in with facebook, then you will need to create your own app on facebook (it's pretty easy and fast) and set the following environment variables:
+- APP_BOLAO_FACEBOOK_ID
+- APP_BOLAO_FACEBOOK_PASS
+
+(You can use {figaro}[https://github.com/laserlemon/figaro] for it. check config/application.example.yml)
+
+== Contributing
+
+If you want to improve something or add new features feel free to send your PR, contributions are welcome.
