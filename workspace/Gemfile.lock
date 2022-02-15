@@ -143,7 +143,7 @@ GEM
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
     polyglot (0.3.5)
-    puma (5.5.1)
+    puma (5.6.2)
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (1.5.5)
